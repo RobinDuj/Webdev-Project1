@@ -1,0 +1,84 @@
+﻿@model projectfiets.Models.PlaceOrderViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap">
+    <title>Fietsenwinkel</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Bestellingen</h1>
+            <div class="col-md-12">
+                <a asp-action="Index" class="btn btn-primary uitlog-button">
+                    <span class="glyphicon glyphicon-box-arrow-right"></span> Uitloggen
+                </a>
+            </div>
+            <div class="col-md-12">
+                <div class="winkelmandje"><a asp-action="PersoonlijkeOrders" class="btn btn-primary cart-button"><span class="glyphicon glyphicon-shopping-cart"></span> Winkelmandje</a></div>
+                @if (Model.Admin == "true")
+                {
+                    <div class="winkelmandjeAdmin"><a asp-action="ListOrders" class="btn btn-primary cart-button">Lijst Bestellingen</a></div>
+                }
+            </div>
+            <div class="col-md-12">
+                <h3>Persoonlijk</h3>
+            </div>
+            <div class="col-md-12">
+                <br /><br />
+                <table class="table table-striped" id="tblPersoonlijk">
+                    <thead>
+                        <tr>
+                            <th>Naam</th>
+                            <th>Aantal</th>
+                            <th>Prijs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="naam-prijs">@Model.Naam</td>
+                            <td>
+                                <table class="table onder-tabel">
+                                    <tbody>
+                                        <tr>
+                                            @foreach (var item in Model.Order.OrderItems)
+                                            {
+                                                <td>@item.Fiets.Naam</td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="table onder-tabel">
+                                    <tbody>
+                                        <tr>
+                                            @foreach (var item in Model.Order.OrderItems)
+                                            {
+                                                <td>@item.Quantity</td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="naam-prijs">€ @Model.Order.price</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12 button">
+                <a asp-action="Order" class="btn btn-primary">Nog iets bestellen?</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

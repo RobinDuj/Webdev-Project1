@@ -1,0 +1,75 @@
+﻿@model projectfiets.Models.Gebruiker
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        body {
+            background-image: url('https://www.sram.com/globalassets/publicsites/media-logos/sram-world.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        .jumbotron {
+            background-color: #f8f9fa;
+            padding: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            margin-right: 10px;
+        }
+    </style>
+    <title>Fietsenwinkel</title>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">Welkom!</h1>
+            <br><br>
+            <form asp-action="Index" method="post">
+                <div class="form-group">
+                    <label for="inpGebruikersNaamLogin">Gebruikersnaam:</label>
+                    <input type="text" class="form-control" id="inpGebruikersNaamLogin" asp-for="Email">
+                </div>
+                <div class="form-group">
+                    <label for="inpWachtwoordLogin">Wachtwoord:</label>
+                    <input type="password" class="form-control" id="inpWachtwoordLogin" asp-for="Password">
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary" id="btnLoginLogin" asp-action="Index">Login</button>
+                    <a asp-action="Registratie" class="btn btn-success" id="btnRegistratieLogin">Registreren</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<projectfiets.Models.Order>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap">
+    <title>Fietsenwinkel</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Bestellingen</h1>
+            </div>
+            <div class="col-md-12">
+                <a asp-action="Index" class="btn btn-primary uitlog-button">
+                    <span class="glyphicon glyphicon-box-arrow-right"></span> Uitloggen
+                </a>
+            </div>
+            @if (ViewBag.melding != null)
+            {
+                <div class="col-md-12">
+                    <span class="span-error">@ViewBag.melding</span>
+                </div>
+            }
+            <div class="col-md-12">
+                <h3>Persoonlijk - Totaal</h3>
+            </div>
+            <div class="col-md-12">
+                <br /><br />
+                <table class="table" id="tblTotaal">
+                    <thead>
+                        <tr>
+                            <th>Datum-Uur</th>
+                            <th>Fiets(en)</th>
+                            <th>Aantal</th>
+                            <th>Prijs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td class="naam-prijs">@order.CreateOrder</td>
+                                <td>
+                                    <table class="table onder-tabel">
+                                        <tbody>
+                                            @foreach (var fiets in order.OrderItems)
+                                            {
+                                                <tr>
+                                                    <td>@fiets.Fiets.Naam</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table onder-tabel">
+                                        <tbody>
+                                            @foreach (var fiets in order.OrderItems)
+                                            {
+                                                <tr>
+                                                    <td>@fiets.Quantity</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td class="naam-prijs">
+                                    € @order.price
+                                </td>
+                            </tr>
+                        }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Prijs: </th>
+                            <th>
+                                € @{
+                                    var totaal = Model.SelectMany(o => o.OrderItems).Sum(oi => oi.Quantity * oi.Fiets.Price);
+                                    @totaal
+                                }
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12 button">
+                <a asp-action="order" class="btn btn-primary">Nog iets bestellen?</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

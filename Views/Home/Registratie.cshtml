@@ -1,0 +1,75 @@
+﻿@model projectfiets.Models.Gebruiker
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Fietsenwinkel</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        body {
+            background-image: url('https://www.sram.com/globalassets/publicsites/media-logos/sram-world.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        .jumbotron {
+            background-color: #f8f9fa;
+            padding: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">Registratie</h1>
+            <form asp-action="Registratie" method="post">
+                <div class="form-group">
+                    <label for="inpGebruikersNaamRegistratie">Gebruikersnaam:</label>
+                    <input type="text" class="form-control" id="inpGebruikersNaamRegistratie" asp-for="Email">
+                </div>
+                <div class="form-group">
+                    <label for="inpWachtwoordRegistratie">Wachtwoord:</label>
+                    <input type="password" class="form-control" id="inpWachtwoordRegistratie" asp-for="Password">
+                </div>
+                <button type="submit" class="btn btn-primary button" id="btnRegistreer">Registreer</button>
+                <a asp-action="Index" class="btn btn-secondary button" id="btnRegistratieLogin">Login</a>
+            </form>
+            @if (ViewBag.Registratie != null)
+            {
+                <h3 class="text-danger">@ViewBag.Registratie</h3>
+            }
+        </div>
+    </div>
+</body>
+</html>
+

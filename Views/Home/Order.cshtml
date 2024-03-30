@@ -1,0 +1,115 @@
+﻿@model projectfiets.Models.OrderViewModel
+@using System.IO;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap">
+    <title>Fietsenwinkel</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Bestel een fiets</h1>
+        @{
+            var isAdminAdmin = Model.Admin;
+        }
+        <div class="col-md-12">
+            <div class="btn-toolbar" role="toolbar">
+                <div class="btn-group mr-2">
+                    <a asp-action="Index" class="btn btn-default">
+                        <span class="glyphicon glyphicon-log-out"></span> Uitloggen
+                    </a>
+                </div>
+                @if (ViewBag.melding != null)
+                {
+                    <div class="btn-group mr-2">
+                        <span class="text-danger">@ViewBag.melding</span>
+                    </div>
+                }
+                @if (isAdminAdmin == "true")
+                {
+                    <div class="btn-group mr-2">
+                        <a asp-action="Admin" class="btn btn-default">
+                            <span class="glyphicon glyphicon-user"></span> Admin
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="btn-group mr-2">
+                        <div class="winkelmandje">
+                            <a asp-action="PersoonlijkeOrders" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Winkelmandje
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        @{
+            var isAdminWinkelmandje = Model.Admin;
+        }
+        @if (isAdminWinkelmandje == "true")
+        {
+            <div class="winkelmandjeAdmin">
+                <a asp-action="listOrders" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Winkelmandje
+                </a>
+            </div>
+        }
+        <br><br><br>
+        <form method="post" asp-action="PlaceOrder">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                @foreach (var fiets in Model.Fietsen)
+                {
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            @if (ViewBag.InvalidFilepaths != null && ViewBag.InvalidFilepaths.Contains(fiets.Naam))
+                            {
+                                <h1 class="titel-achter-fiets">Fiets: @fiets.Naam</h1>
+                            }
+                            else
+                            {
+                                <img style="height: 397px; width: 601px;" src="~/images/@(fiets.ImageUrl)" alt="@fiets.Naam">
+                            }
+                            <div class="caption">
+                                <h2>@fiets.Naam</h2>
+                                <div class="form-group">
+                                    <label for="inpAantal">Aantal: </label>
+                                    <input type="number" id="quantity_@fiets.ID" asp-for="FietsQuantities[fiets.ID]" min="0" value="@Model.FietsQuantities[fiets.ID]" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label class="prijs">
+                                        Prijs: € @fiets.Price
+                                    </label>
+                                    @{
+                                        var isAdminAanpassen = Model.Admin;
+                                    }
+                                    @if (isAdminAanpassen == "true")
+                                    {
+                                        <a href="@Url.Action("Aanpassen", "Home", new { id = fiets.ID })" class="btn btn-primary">Pas prijs aan</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <input type="submit" value="Bestel" class="btn btn-success" />
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>
+
+

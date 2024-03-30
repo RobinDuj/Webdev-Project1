@@ -1,0 +1,64 @@
+﻿@model IEnumerable<projectfiets.Models.OrderSummaryViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap">
+    <title>Samenvatting Orders</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Samenvatting Orders</h1>
+            </div>
+            <div class="col-md-12">
+                <a asp-action="Index">
+                    <button class="btn btn-primary">
+                        <span class="glyphicon glyphicon-box-arrow-right"></span> Uitloggen
+                    </button>
+                </a>
+                <a asp-action="Admin">
+                    <button class="btn btn-primary">
+                        <span class="glyphicon glyphicon-user"></span> Naar Admin
+                    </button>
+                </a>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Fiets Model</th>
+                            <th>Aantal</th>
+                            <th>Totale Prijs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.FietsModel</td>
+                                <td>@item.Aantal</td>
+                                <td>@item.TotalePrijs</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br /><br />
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+

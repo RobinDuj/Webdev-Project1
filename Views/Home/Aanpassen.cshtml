@@ -1,0 +1,55 @@
+﻿@model projectfiets.Models.fiets
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap">
+    <title>Fiets Aanpassen</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Prijs van de fiets aanpassen</h1>
+        <a href="@Url.Action("Order")">
+            <button type="button" class="btn btn-primary">
+                <span class="glyphicon glyphicon-arrow-left"></span> Terug naar Bestelling
+            </button>
+        </a>
+        <br /><br />
+        <form action="Aanpassen" method="post">
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="form-group">
+                        <label for="aanpassenID">Fiets ID:</label>
+                        <input type="text" class="form-control" id="aanpassenID" value="@Model.ID" readonly asp-for="ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="aanpassenNaam">Naam fiets:</label>
+                        <input type="text" class="form-control" id="aanpassenNaam" value="@Model.Naam" readonly asp-for="Naam">
+                    </div>
+                    <div class="form-group">
+                        <label for="aanpassenPrijs">Prijs:</label>
+                        <input type="text" class="form-control" id="aanpassenPrijs" value="@Model.Price" asp-for="Price">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                </div>
+            </div>
+        </form>
+        @if (ViewBag.Error != null)
+        {
+            <span class="text-danger">@ViewBag.Error</span>
+        }
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+

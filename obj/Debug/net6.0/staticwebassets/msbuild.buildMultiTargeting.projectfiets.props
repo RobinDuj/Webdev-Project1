@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\projectfiets.props" />
+</Project>

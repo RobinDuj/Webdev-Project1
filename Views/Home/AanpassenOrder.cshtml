@@ -1,0 +1,78 @@
+﻿@model projectfiets.Models.Order
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap">
+    <title>Fietsenwinkel</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Bestellingen</h1>
+            </div>
+            <div class="col-md-12">
+                <a asp-action="Index">
+                    <button class="btn btn-primary">
+                        <span class="fas fa-arrow-right"></span> Uitloggen
+                    </button>
+                </a>
+                <a asp-action="Admin">
+                    <button class="btn btn-primary">
+                        <span class="glyphicon glyphicon-user"></span> Naar Admin
+                    </button>
+                </a>
+                <a asp-action="ListOrders" class="btn btn-primary">Bestellingen - Admin</a>
+            </div>
+            <div class="col-md-12">
+                <h3>Pas bestelling aan:</h3>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <h3>Bestellingenlijst <span class="glyphicon glyphicon-wrench"></span> (Under construction)</h3>
+            <br />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Product</th>
+                        <th>Fietsnaam</th>
+                        <th>Hoeveelheid</th>
+                        <th>Prijs fiets</th>
+                        <th>Totaalprijs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>MTB1</td>
+                        <td><input type="text" name="fietsnaam1" class="form-control" /></td>
+                        <td><input type="number" name="hoeveelheid1" class="form-control" /></td>
+                        <td><input type="number" name="prijsfiets1" class="form-control" /></td>
+                        <td><input type="number" name="totaalprijs1" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>MTB2</td>
+                        <td><input type="text" name="fietsnaam2" class="form-control" /></td>
+                        <td><input type="number" name="hoeveelheid2" class="form-control" /></td>
+                        <td><input type="number" name="prijsfiets1" class="form-control" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+
+
+

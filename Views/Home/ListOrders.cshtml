@@ -1,0 +1,100 @@
+﻿@model IEnumerable<projectfiets.Models.OrderItem>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap">
+    <title>Fietsenwinkel</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Bestellingen</h1>
+            </div>
+            <div class="col-md-12">
+                <div class="btn-toolbar" role="toolbar">
+                    <div class="btn-group mr-2">
+                        <a asp-action="Index" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-box-arrow-right"></span> Uitloggen
+                        </a>
+                    </div>
+                    <div class="btn-group">
+                        <a asp-action="Admin" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-person-fill-gear"></span> Admin
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @if (ViewBag.melding != null)
+            {
+                <div class="col-md-12">
+                    <span class="span-error">@ViewBag.melding</span>
+                </div>
+            }
+            <div class="col-md-12">
+                <h3>Bestellingenlijst</h3>
+                <br />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Klantennummer</th>
+                            <th>Fietsen</th>
+                            <th>Totaalprijs</th>
+                            <th>Besteldatum</th>
+                            <th>Aanpassen</th>
+                            <th>Verwijderen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            @foreach (var currentOrder in Model)
+                            {
+                                <tr>
+                                    <td>@currentOrder.Order.CustomerID</td>
+                                    <td>
+                                        <ul>
+                                            <li>@currentOrder.Quantity stuks van @currentOrder.Fiets.Naam</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        € @currentOrder.Order.price
+                                    </td>
+                                    <td>
+                                        € @currentOrder.Order.CreateOrder
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("AanpassenOrder", "Home", new { id = currentOrder.Id})" class="btn btn-primary">Aanpassen</a>
+                                    </td>
+                                    <td>
+                                        <form asp-action="VerwijderenOrder" method="post">
+                                            <input type="hidden" name="orderId" value="@currentOrder.Order.ID" />
+                                            <button type="submit" class="btn btn-danger">Verwijderen</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>Geen bestellingen</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
